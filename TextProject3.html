@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+			h1 {
+				font-family: fantasy;
+				text-decoration: underline cyan;
+				color: #F7F7F7;
+				text-align:center;	
+			}
+			h2 {
+				font-family: cursive;
+				color: #F7F7F7;
+				text-align:center;
+			}
+			div {
+				text-align:center;
+				color: #F7F7F7;	
+			}
+			img {
+				padding: 5px;
+				width: 220px;
+				height: 330px;
+			}
+			body {
+				background-image: url("XTreme Project Background.jpg");
+			}
+			span {
+				color: cyan;
+			}
+		</style>
+		<script>
+			const ROCK = 1, PAPER = 2, SCISSOR = 3
+			let randomNumber = (bottom,top) => Math.floor((Math.random() * top) + bottom);
+			
+			function initialCards() {
+				CNumRocks =  5;
+				CNumPapers = 5;
+				CNumScissors = 5;
+				PNumRocks = 5;
+				PNumPapers = 5;
+				PNumScissors = 5;
+				computerRocks = document.getElementById("CRocks");
+				computerPapers = document.getElementById("CPapers");
+				computerScissors = document.getElementById("CScissors");
+				
+				playerRocks = document.getElementById("PRocks");
+				playerPapers = document.getElementById("PPapers");
+				playerScissors = document.getElementById("PScissors");
+		
+				computerChosedCard = document.getElementById("computerWeapon");
+				computerChosedCard.innerHTML = '<img src = "ComputerCardHolder.jpg" />'
+				playerChosedCard = document.getElementById("playerWeapon");
+				playerChosedCard.innerHTML = '<img src = "PlayerCardHolder.jpg" />'
+				gameLog = "";
+				gameLogOutput.innerHTML = gameLog;
+			}	
+			
+			function showRule() {
+				body.innerHTML = "Rules";
+			}
+			
+			function checkWin(num) {
+				computerNum = randomNumber(1,3);
+				if (CNumRocks != 0) {
+					if (num == ROCK && computerNum == ROCK) {
+						candyLog += "Tie! You and the Computer both chose Rock.";
+						computerChosedCard.innerHTML = '<img src = "Rock.jpg" />'
+						playerChosedCard.innerHTML = '<img src = "Rock.jpg" />'
+					}
+					else {
+						computerNum === PAPER ? (PNumRocks--, CNumRocks++, computerChosedCard.innerHTML = '<img src = "Paper.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', candyLog += "Lost! You chose Rock and the Computer chose Paper. You lost your Rock weapon to the Computer.") :
+						computerNum === SCISSOR ? (PNumScissors++, CNumScissors--, computerChosedCard.innerHTML = '<img src = "Scissor.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', candyLog += "Won! You chose Rock and the Computer choose Scissor. You have added a Scissor weapon to your arsenal.") :
+					}
+				}
+
+			}
+			
+			function display() {
+				computerRocks.innerHTML = "Rock Weapons Remaining: " + CNumRocks;
+				computerPapers.innerHTML = "Paper Weapons Remaining: " + CNumPapers;
+				computerScissors.innerHTML = "Scissors Weapons Remaining: " + CNumScissors;
+				
+				playerRocks.innerHTML = "Remaining: " + PNumRocks;
+				playerPapers.innerHTML = "Remaning: " + PNumPapers;
+				playerScissors.innerHTML = "Reamaining: " + PNumScissors;
+			}
+				
+		</script>
+		
+	</head>
+	
+	<body onload = "initialCards();">
+		<h1>XTreme Rock Paper Scissor</h1>
+		<h2>Rock Paper Scissors is a common game people are familiar with and play. 
+			However, the ordinary feature doesn't make the game people would play for a long period time. 	
+			Now, building on top of Rock Paper Scissor is a new game XTreme Rock Paper Scissor. "XRPS is a 
+			two player game where each player controls a limited arsenal of rocks, papers, and
+			scissors that they must play against each other. The object of the game is to capture all of the
+			weapons in your opponent’s arsenal." Additionally, it retains the fundamental principles of Rock Paper Scissors.
+			Enjoy! 
+		</h2> 
+		<div>
+			<h3>Computer's Weapons</h3>
+			</br>
+			<span><img src = "Card PlaceHolder1.jpg" /><span>
+			<span><img src = "Card PlaceHolder2.jpg" /><span>
+			<span><img src = "Card PlaceHolder3.jpg" /><span>
+		</div>
+		<div> 
+			<span id = "CRocks"> Rock Weapons' Remaining: 5 </div> <span id = "Cpaper"> Paper Weapons' Remaining: 5 </span> <span id = "CScissors"> Scissor Weapons' Remaining: 5</span>
+		<div>
+		<div id = "computerWeapon"></div>
+		<div id = "playerWeapon"></div> 
+		<div>
+			<h3>Your Weapons</h3>
+			</br>
+			<span id = rockCard onclick = "checkWin(1)"/><img src = "Rock.jpg" /></span>
+			<span id = PaperCard onclick = "checkWin(2)"/><img src = "Paper.jpg" /></span>
+			<span id = ScissorCard onclick = "checkWin(3)"/><img src = "Scissors.jpg" /></span>
+		</div>
+		<div> 
+			<span id = "PRocks"> Remaining: 5 </span> <span id = "Ppaper"> Remaining: 5 </span> <span id = "PScissors"> Remaining: 5</span>
+		<div>
+	</body>
+<html>
