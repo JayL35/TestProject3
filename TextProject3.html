@@ -20,7 +20,7 @@
 			}
 			img {
 				padding: 5px;
-				width: 220px;
+				width: 215px;
 				height: 330px;
 			}
 			body {
@@ -58,69 +58,107 @@
 				gameLog = "";
 			}	
 			
-			function showRule() {
-				body.innerHTML = "Rules";
+			function rules() {
+				
+				
+			}
+			
+			
+			function computerRoll() {
+				testNum = randomNumber(1,3);
+				if (testNum === ROCK && CNumRocks == 0) {
+					while (testNum === ROCK) {
+						testNum = randomNumber(1,3);
+					}
+					console.log(testNum);
+					return testNum;
+				}
+				else if (testNum === PAPER && CNumPapers == 0) {
+					while (testNum === PAPER) {
+						testNum = randomNumber(1,3);
+					}
+					console.log(testNum);
+					return testNum;
+				}
+				else if (testNum === SCISSOR && CNumScissors == 0) {
+					while (testNum === SCISSOR) {
+						testNum = randomNumber(1,3);
+					}
+					return testNum;
+					console.log(testNum);
+				}
+				else {
+					console.log(testNum);
+					return testNum;
+				}
 			}
 			
 			function checkWin(num) {
-				computerNum = randomNumber(1,3);
+				computerNum = computerRoll();
 				if (num == ROCK) {
-					if (CNumRocks == 0) {
-						gameLog = "You ran out of Rock Weapons to use!" + gameLog;
+					if (PNumRocks == 0) {
+						gameLog = "You ran out of Rock Weapons to use!<br />" + gameLog;
 					}
-					else if (num == ROCK && computerNum == ROCK) {
-						gameLog = "Tie! You and the Computer both chose Rock." + gameLog;
+					else if (computerNum == ROCK) {
+						gameLog = "Tie! You and the Computer both chose Rock.<br />" + gameLog;
 						computerChosedCard.innerHTML = '<img src = "Rock.jpg" />'
 						playerChosedCard.innerHTML = '<img src = "Rock.jpg" />'
 					}
 					else {
-						computerNum === PAPER ? (PNumRocks--, CNumRocks++, computerChosedCard.innerHTML = '<img src = "Paper.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', gameLog = "Lost! You chose Rock and the Computer chose Paper. You lost a Rock weapon to the Computer." + gameLog) : 
-						computerNum === SCISSOR ? (PNumScissors++, CNumScissors--, computerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', gameLog = "Won! You chose Rock and the Computer choose Scissor. You have added a Scissor weapon to your arsenal." + gameLog) :
-						display();
+						computerNum === PAPER ? (PNumRocks--, CNumRocks++, computerChosedCard.innerHTML = '<img src = "Paper.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', gameLog = "Lost! You chose Rock and the Computer chose Paper. You lost a Rock weapon to the Computer.<br />" + gameLog) :
+						computerNum === SCISSOR ? (PNumScissors++, CNumScissors--, computerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', playerChosedCard.innerHTML = '<img src = "Rock.jpg" />', gameLog = "Won! You chose Rock and the Computer choose Scissor. You have added a Scissor weapon to your arsenal.<br />" + gameLog) : 
+						null;
 					}
 				}
 				if (num == PAPER) {
-					if (CNumPapers == 0) {
-						gameLog = "You ran out of Paper Weapons to use!" + gameLog;
+					if (PNumPapers == 0) {
+						gameLog = "You ran out of Paper Weapons to use!<br />" + gameLog;
 					}
-					else if (num == PAPER && computerNum == PAPER) {
-						gameLog = "Tie! You and the Computer both chose Paper." + gameLog;
+					else if (computerNum == PAPER) {
+						gameLog = "Tie! You and the Computer both chose Paper.<br />" + gameLog;
 						computerChosedCard.innerHTML = '<img src = "Paper.jpg" />'
 						playerChosedCard.innerHTML = '<img src = "Paper.jpg" />'
 					}
 					else {
-						computerNum === ROCK ? (PNumRocks++, CNumRocks--, computerChosedCard.innerHTML = '<img src = "Rock.jpg" />', playerChosedCard.innerHTML = '<img src = "Paper.jpg" />', gameLog = "Won! You chose Paper and the Computer chose Rock. You have added a Rock Weapon to your arsenal." + gameLog) :
-						computerNum === SCISSOR ? (PNumPapers--, CNumPapers++, computerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', playerChosedCard.innerHTML = '<img src = "Paper.jpg" />', gameLog = "Lost! You chose Paper and the Computer choose Scissor. You lost a Paper Weapon to the Computer." + gameLog) :
-						display();
+						computerNum === ROCK ? (PNumRocks++, CNumRocks--, computerChosedCard.innerHTML = '<img src = "Rock.jpg" />', playerChosedCard.innerHTML = '<img src = "Paper.jpg" />', gameLog = "Won! You chose Paper and the Computer chose Rock. You have added a Rock Weapon to your arsenal.<br />" + gameLog) :
+						computerNum === SCISSOR ? (PNumPapers--, CNumPapers++, computerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', playerChosedCard.innerHTML = '<img src = "Paper.jpg" />', gameLog = "Lost! You chose Paper and the Computer choose Scissor. You lost a Paper Weapon to the Computer.<br />" + gameLog) : 
+						null;
 					}
 				}
 				if (num == SCISSOR) {
-					if (CNumScissors == 0) {
-						gameLog = "You ran out of Scissor Weapons to use!" + gameLog;
+					if (PNumScissors == 0) {
+						gameLog = "You ran out of Scissor Weapons to use!<br />" + gameLog;
 					}
-					if (num == ROCK && computerNum == ROCK) {
-						gameLog += "Tie! You and the Computer both chose Scissor.";
+					else if (computerNum == SCISSOR) {
+						gameLog = "Tie! You and the Computer both chose Scissor.<br />" + gameLog;
 						computerChosedCard.innerHTML = '<img src = "Scissors.jpg" />'
 						playerChosedCard.innerHTML = '<img src = "Scissors.jpg" />'
 					}
 					else {
-						computerNum === ROCK ? (PNumScissors--, CNumScissors++, computerChosedCard.innerHTML = '<img src = "Rock.jpg" />', playerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', gameLog = "Lost! You chose Scissor and the Computer chose Rock. You lost a Scissor weapon to the Computer." + gameLog) :
-						computerNum === PAPER ? (PNumPapers++, CNumPapers--, computerChosedCard.innerHTML = '<img src = "Paper.jpg" />', playerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', gameLog = "Won! You chose Scissor and the Computer choose Paper. You have added a Paper weapon to your arsenal." + gameLog) :
-						display();
+						computerNum === ROCK ? (PNumScissors--, CNumScissors++, computerChosedCard.innerHTML = '<img src = "Rock.jpg" />', playerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', gameLog = "Lost! You chose Scissor and the Computer chose Rock. You lost a Scissor weapon to the Computer.<br />" + gameLog) :
+						computerNum === PAPER ? (PNumPapers++, CNumPapers--, computerChosedCard.innerHTML = '<img src = "Paper.jpg" />', playerChosedCard.innerHTML = '<img src = "Scissors.jpg" />', gameLog = "Won! You chose Scissor and the Computer choose Paper. You have added a Paper weapon to your arsenal.<br />" + gameLog) : 
+						null;
 					}
 				}
+				display();
 			}
 			
+			
 			function display() {
-				computerRocks.innerHTML = "Rock Weapons Remaining: " + CNumRocks;
-				computerPapers.innerHTML = "Paper Weapons Remaining: " + CNumPapers;
-				computerScissors.innerHTML = "Scissors Weapons Remaining: " + CNumScissors;
+				computerRocks.innerHTML = "Computer's Rocks Remaining: " + CNumRocks;
+				computerPapers.innerHTML = "Computer's Papers Remaining: " + CNumPapers;
+				computerScissors.innerHTML = "Computer's Scissors Remaining: " + CNumScissors;
 				
-				playerRocks.innerHTML = "Remaining: " + PNumRocks;
-				playerPapers.innerHTML = "Remaning: " + PNumPapers;
-				playerScissors.innerHTML = "Reamaining: " + PNumScissors;
+				playerRocks.innerHTML = "Your Rock Weapons Remaining: " + PNumRocks;
+				playerPapers.innerHTML = "Your Paper Weapons Remaining: " + PNumPapers;
+				playerScissors.innerHTML = "Your Scissor Weapons Remaining: " + PNumScissors;
 				
 				gameLogOutput.innerHTML = gameLog;
+			}
+			
+			function restart() {
+				initialCards();
+				display();
 			}
 				
 		</script>
@@ -137,7 +175,10 @@
 			weapons in your opponent’s arsenal." Additionally, it retains the fundamental principles of Rock Paper Scissors.
 			Enjoy! 
 		</h2> 
-
+		<div>
+			<button onclick = "rules()"/>Show Rules</button>
+			<button onclick = "restart()"/>Reset</button>
+		</div>
 		<div>
 			<h3>Computer's Weapons</h3>
 			</br>
@@ -146,7 +187,9 @@
 			<span><img src = "Card PlaceHolder3.jpg" /><span>
 		</div>
 		<div> 
-			<span id = "CRocks"> Rock Weapons' Remaining: 5 </span> <span id = "Cpaper"> Paper Weapons' Remaining: 5 </span> <span id = "CScissors"> Scissor Weapons' Remaining: 5</span>
+			<span id = "CRocks"> Computer's Rocks Remaining: 5, </span>
+			<span id = "CPapers"> Computer's Papers  Remaining: 5, </span>
+			<span id = "CScissors"> Computer's Scissors  Remaining: 5</span>
 		<div>
 		<div id = "computerWeapon"></div>
 		<div id = "playerWeapon"></div> 
@@ -158,7 +201,11 @@
 			<span id = ScissorCard onclick = "checkWin(3)"/><img src = "Scissors.jpg" /></span>
 		</div>
 		<div> 
-			<span id = "PRocks"> Remaining: 5 </span> <span id = "Ppaper"> Remaining: 5 </span> <span id = "PScissors"> Remaining: 5</span>
+			<span id = "PRocks"> Your Rock Weapons Remaining: 5, </span> 
+			<span id = "PPapers"> Your Paper Weapons Remaining: 5, </span> 
+			<span id = "PScissors"> Your Scissor Weapons Remaining: 5</span>
 		<div>
+		<h3>Game History/Log</h3>
+		<div id = "gamelog"></div>
 	</body>
 <html>
